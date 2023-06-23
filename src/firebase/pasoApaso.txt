@@ -1,0 +1,5 @@
+1 -> traer el servicio de firestore
+
+2 -> crear el puntero al dato que queremos traer
+
+3 -> traer el dato con una promesa

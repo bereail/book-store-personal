@@ -16,6 +16,7 @@ import Spinner from "./components/ui/Spinner/Spinner";
 import { APIContext } from "./components/services/api/api.context";
 import Singin from "./components/Singup/Singup";
 import Registered from "./components/routes/Registered";
+import ItemDetailContainer from "./firebase/firebase";
 const App = () => {
   const { theme } = useContext(ThemeContext);
   const { isLoading } = useContext(APIContext);
@@ -33,6 +34,10 @@ const App = () => {
     {
       path: "/registered",
       element: <Registered />, 
+    },
+    {
+      path: "/fireBase",
+      element: <ItemDetailContainer />
     },
     {
       path: "/home",
