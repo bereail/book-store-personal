@@ -6,10 +6,10 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import "./App.css";
+import 'react-toastify/dist/ReactToastify.css';
 import { Button, ToastContainer } from "react-bootstrap";
 import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/Login/Login";
-import Dashboard from "./components/Dashboar/Dashboar";
 import Protected from "./components/routes/Protected";
 import NotFound from "./components/routes/NotFound";
 import { ThemeContext } from "./components/services/theme/theme.context";
@@ -23,6 +23,7 @@ import BookButton from "./components/BookButton/Links";
 import BookForm from "./components/BookForm/BookForm";
 import Links from "./components/BookButton/Links";
 import AddBook from "./components/AddBook/AddBook";
+import BookList from "./components/BookList/BookList";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -33,6 +34,10 @@ const App = () => {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/booklist",
+      element: <BookList />
     },
     {
       path: "/singin",
@@ -61,14 +66,6 @@ const App = () => {
     {
       path: "/addBook",
       element: <AddBook />
-    },
-    {
-      path: "/home",
-      element: (
-        <Protected>
-          <Dashboard />
-        </Protected>
-      ),
     },
     {
       path: "*",
