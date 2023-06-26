@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import "./Card.css";
 import { ThemeContext } from "../services/theme/theme.context";
+import BookButton from "../BookButton/BookBotton";
 
 const BookCard = ({ children }) => {
   const { theme } = useContext(ThemeContext);
+
   return (
     <div
       className={`book-item-container ${
@@ -11,6 +13,9 @@ const BookCard = ({ children }) => {
       }`}
     >
       {children}
+      <div>
+        <BookButton />
+      </div>
     </div>
   );
 };

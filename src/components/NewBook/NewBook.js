@@ -1,7 +1,7 @@
-import "./NewBook.css";
-
-import BookForm from "../BookForm/BookForm";
-import { useState } from "react";
+import { getDoc } from 'firebase/firestore';
+import BookItem from "../BookItem/BookItems";
+import React, { useState } from "react";
+import BookForm from '../BookForm/BookForm';
 
 const NewBook = ({ onBookAdded }) => {
   const [showForm, setShowForm] = useState(false);
@@ -11,6 +11,7 @@ const NewBook = ({ onBookAdded }) => {
     console.log("In new Book");
     onBookAdded(book);
   };
+
   const showBookForm = () => {
     setShowForm(true);
   };
@@ -18,6 +19,7 @@ const NewBook = ({ onBookAdded }) => {
   const hideBookForm = () => {
     setShowForm(false);
   };
+
   return (
     <div className="new-book">
       {showForm ? (
