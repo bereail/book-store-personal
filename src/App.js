@@ -18,6 +18,9 @@ import Singin from "./components/Singup/Singup";
 import Registered from "./components/routes/Registered";
 import BookItem from "./components/BookItem/BookItems";
 import FireBase from "./firebase/FireBase";
+import BookList from "./components/BookList/BookList";
+import ReserveBook from "./components/ReserveBookButton/ReserveBookButton";
+import ReservedBookList from "./components/ReservedBookList/ReservedBookList";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -46,8 +49,16 @@ const App = () => {
       ),
     },
     {
+      path: "/bookList",
+      element: <BookList />
+    },
+    {
       path: "*",
       element: <NotFound />,
+    },
+    {
+      path : "/reserved-books",
+      element : <ReservedBookList />
     },
     {
       path: "/fireBase",

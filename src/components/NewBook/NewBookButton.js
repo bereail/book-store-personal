@@ -1,5 +1,4 @@
 import "./NewBookButton.css";
-
 import BookForm from "../BookForm/BookForm";
 import { useState } from "react";
 
@@ -23,7 +22,7 @@ const NewBookButton = ({ onBookAdded }) => {
       {showForm ? (
         <BookForm onHideForm={hideBookForm} onBookAdded={onBookAddedHandler} />
       ) : (
-        <button onClick={showBookForm}>Registrar nuevo libro</button>
+        <button onClick={showBookForm}>New Book</button>
       )}
     </div>
   );
