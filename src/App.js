@@ -21,6 +21,7 @@ import FireBase from "./firebase/FireBase";
 import BookList from "./components/BookList/BookList";
 import ReserveBook from "./components/ReserveBookButton/ReserveBookButton";
 import ReservedBookList from "./components/ReservedBookList/ReservedBookList";
+import AddAdminForm from "./components/AddAdmin/AddAdminForm/AddAdminForm";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -47,6 +48,10 @@ const App = () => {
           <Dashboard />
         </Protected>
       ),
+    },
+    {
+      path: "/addAdmin",
+      element: <AddAdminForm />
     },
     {
       path: "/bookList",
