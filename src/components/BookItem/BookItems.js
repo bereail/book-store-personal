@@ -19,6 +19,9 @@ const BookItem = ({ data }) => {
       <h1>{Title}</h1>
       <img className="image" src={Img}  alt="descripcion img"/>
     </div>
+    <Button>
+         Reserved
+        </Button>
     </BookCard>
   );
 };

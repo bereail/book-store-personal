@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./firebase/config"
 import "./index.css";
+
 import App from "./App";
 import { AuthenticationContextProvider } from "./components/services/authentication/authentication.context";
 import { ThemeContextProvider } from "./components/services/theme/theme.context";

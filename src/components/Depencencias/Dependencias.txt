@@ -1,8 +1,0 @@
--Ventanas emergentes
- *npm install react-toastify
- *desde app.js
-    import {ToastContainer} from 'react-toastify'
-    import 'react-toastify/dist/ReactToastify.css'
-    llamo al componente {ToastContainer}
-*import {toast } from 'react-toastify'
- desde la pagina que deseo utilizarlo

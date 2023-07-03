@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import {
-  Link,
   Navigate,
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+
 import "./App.css";
-import 'react-toastify/dist/ReactToastify.css';
-import { Button, ToastContainer } from "react-bootstrap";
-import 'react-toastify/dist/ReactToastify.css';
+
 import Login from "./components/Login/Login";
+import Dashboard from "./components/Dashboar/Dashboar";
 import Protected from "./components/routes/Protected";
 import NotFound from "./components/routes/NotFound";
 import { ThemeContext } from "./components/services/theme/theme.context";
@@ -18,12 +17,10 @@ import { APIContext } from "./components/services/api/api.context";
 import Singin from "./components/Singup/Singup";
 import Registered from "./components/routes/Registered";
 import BookItem from "./components/BookItem/BookItems";
-import BooksCRUD from "./components/BookItem/BookItems";
-import BookButton from "./components/BookButton/Links";
-import BookForm from "./components/BookForm/BookForm";
-import Links from "./components/BookButton/Links";
-import AddBook from "./components/AddBook/AddBook";
+import FireBase from "./firebase/FireBase";
 import BookList from "./components/BookList/BookList";
+import ReserveBook from "./components/ReserveBookButton/ReserveBookButton";
+import ReservedBookList from "./components/ReservedBookList/ReservedBookList";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -36,10 +33,6 @@ const App = () => {
       element: <Login />,
     },
     {
-      path: "/booklist",
-      element: <BookList />
-    },
-    {
       path: "/singin",
       element: <Singin />, 
     },
@@ -48,28 +41,28 @@ const App = () => {
       element: <Registered />, 
     },
     {
-        path: "/books",
-        element: <BooksCRUD />
+      path: "/home",
+      element: (
+        <Protected>
+          <Dashboard />
+        </Protected>
+      ),
     },
     {
-      path: "/bookForm",
-      element: <BookForm />
-    },
-    {
-      path: "/buttons",
-      element: <BookButton />
-    },
-    {
-      path: "/links",
-      element: <Links />
-    },
-    {
-      path: "/addBook",
-      element: <AddBook />
+      path: "/bookList",
+      element: <BookList />
     },
     {
       path: "*",
       element: <NotFound />,
+    },
+    {
+      path : "/reserved-books",
+      element : <ReservedBookList />
+    },
+    {
+      path: "/fireBase",
+      element: <FireBase />
     },
   ]);
   return (
