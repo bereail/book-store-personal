@@ -23,6 +23,7 @@ import ReserveBook from "./components/ReserveBookButton/ReserveBookButton";
 import ReservedBookList from "./components/ReservedBookList/ReservedBookList";
 import AddAdminForm from "./components/AddAdmin/AddAdminForm/AddAdminForm";
 
+
 const App = () => {
   const { theme } = useContext(ThemeContext);
   const { isLoading } = useContext(APIContext);
@@ -50,7 +51,7 @@ const App = () => {
       ),
     },
     {
-      path: "/addAdmin",
+      path: "/addadmin",
       element: <AddAdminForm />
     },
     {
