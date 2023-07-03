@@ -1,8 +1,9 @@
-import "./NewBookButton.css";
+import "./NewBook.css";
+
 import BookForm from "../BookForm/BookForm";
 import { useState } from "react";
 
-const NewBookButton = ({ onBookAdded }) => {
+const NewBook = ({ onBookAdded }) => {
   const [showForm, setShowForm] = useState(false);
 
   const onBookAddedHandler = (book) => {
@@ -12,7 +13,7 @@ const NewBookButton = ({ onBookAdded }) => {
   };
   const showBookForm = () => {
     setShowForm(true);
-  }
+  };
 
   const hideBookForm = () => {
     setShowForm(false);
@@ -22,10 +23,10 @@ const NewBookButton = ({ onBookAdded }) => {
       {showForm ? (
         <BookForm onHideForm={hideBookForm} onBookAdded={onBookAddedHandler} />
       ) : (
-        <button onClick={showBookForm}>New Book</button>
+        <button onClick={showBookForm}>Registrar nuevo libro</button>
       )}
     </div>
   );
 };
 
-export default NewBookButton;
+export default NewBook;

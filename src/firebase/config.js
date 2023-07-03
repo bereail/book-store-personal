@@ -1,7 +1,6 @@
-
-import firebase from "firebase/compat/app";
-
-import 'firebase/compat/firestore';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBFoRVauibpzvLHjTKM8sWLbTpYPZkR3V4",
@@ -13,6 +12,8 @@ const firebaseConfig = {
   measurementId: "G-1KGN2T2HP5"
 };
 
-// Initialize Firebase
-const fb = firebase.initializeApp(firebaseConfig);
-export const db = fb.firestore();
+// Initialize Firebase la aplicación y la guadamos en firebase
+const firebaseApp = initializeApp(firebaseConfig);
+//Exportamos firebase para poder utilizarla en cualquier lugar de la app
+export default firebaseApp;
+

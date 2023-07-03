@@ -1,83 +1,108 @@
-import React, {useState} from "react";
-import {db} from "../../firebase/config";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
-const BookForm = () => {
-  // Declara los estados para cada campo del formulario
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [pages, setPages] = useState('');
-  const [description, setDescription] = useState('');
-  const [img, setImg] = useState('');
+import "./BookForm.css";
 
-  // Función para enviar los datos a Firebase
-  const sendDataToFireBase = () => {
-    // Crea un objeto con los datos del libro
-    const bookData = {
-      title: title,
-      author: author,
-      pages: pages,
-      description: description,
-      img: img
+const BookForm = ({ onBookAdded, onHideForm }) => {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [dateRead, setDateRead] = useState("");
+  const [pageCount, setPageCount] = useState("");
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("Check form");
+      setFormValid(title && author && dateRead && pageCount);
+    }, 500);
+
+    return () => {
+      console.log("Cleanup");
+      clearTimeout(timer);
     };
+  }, [title, author, dateRead, pageCount]);
 
-    // Agrega el objeto a la colección 'books' en Firebase
-    db.collection('books').add(bookData)
-      .then(() => {
-        alert("Datos enviados exitosamente");
-      })
-      .catch((error) => {
-        alert("Error al enviar los datos: ", error);
-      });
-  }
+  const changeTitleHandler = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const changeAuthorHandler = (event) => {
+    setAuthor(event.target.value);
+  };
+
+  const changeDateReadHandler = (event) => {
+    setDateRead(event.target.value);
+  };
+
+  const changePageCountHandler = (event) => {
+    setPageCount(event.target.value);
+  };
+
+  const addBookHandler = (event) => {
+    event.preventDefault();
+    const newBook = {
+      id: Math.random(),
+      title,
+      author,
+      dateRead: new Date(dateRead),
+      pageCount,
+    };
+    onBookAdded(newBook);
+  };
+
+  const hideFormHandler = (event) => {
+    event.preventDefault();
+    onHideForm();
+  };
 
   return (
-    <div className="reset">
-      <h1>New Book</h1>
-        <div>
-          <label>Title:</label>
-          <input 
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Author:</label>
-          <input 
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Pages:</label>
+    <form>
+      <div className="new-book-controls">
+        <div className="new-book-control">
+          <label>Título</label>
           <input
+            onChange={changeTitleHandler}
+            type="text"
+            className="input-control"
+          />
+        </div>
+        <div className="new-book-control">
+          <label>Autor</label>
+          <input
+            onChange={changeAuthorHandler}
+            type="text"
+            className="input-control"
+          />
+        </div>
+        <div className="new-book-control">
+          <label>Páginas</label>
+          <input
+            onChange={changePageCountHandler}
             type="number"
-            value={pages}
-            onChange={(e) => setPages(e.target.value)}
+            className="input-control"
+            min="1"
+            step="1"
           />
         </div>
-        <div>
-          <label>Description:</label>
+        <div className="new-book-control">
+          <label>¿Cuándo terminaste de leerlo?</label>
           <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={changeDateReadHandler}
+            type="date"
+            className="input-control"
+            min="2019-01-01"
+            max="2023-12-31"
           />
         </div>
-        <div>
-          <label>Image Link:</label>
-          <input 
-            type="text"
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
-          />
-        </div>
-        <button onClick={sendDataToFireBase}>Enviar datos</button>
-    </div>
-  )
-}
+      </div>
+      <div className="new-book-actions">
+        <button onClick={hideFormHandler}>Cancelar</button>
+        <Button disabled={!formValid} onClick={addBookHandler}>
+          Agregar lectura
+        </Button>
+      </div>
+    </form>
+  );
+};
 
-    
 export default BookForm;
-    

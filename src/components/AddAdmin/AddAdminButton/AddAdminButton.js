@@ -1,19 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./AddAdminButton.css";
+import { Link } from "react-router-dom";
+import "./AddAdminButton.css"
 
 const AddAdminButton = () => {
-  const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    navigate("/addadmin"); // Aquí se realiza la navegación a la ruta "addadmin"
-  };
-
-  return (
-    <div className="add-admin">
-      <button onClick={handleButtonClick}>Add Admin</button>
-    </div>
-  );
-};
+    return (
+        <div className="add-admin">
+            <Link to="/addAdmin">
+                <button>Add Admin</button>
+            </Link>
+        </div>
+    )
+}
 
 export default AddAdminButton;

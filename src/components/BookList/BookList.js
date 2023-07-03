@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebase/config";
+import { db } from "../../firebase/configDB";
 import "./BookList.css";
-import Delete from "../DeleteBook/Delete";
-import EditBook from "../EditBookButton/EditBookButton";
+
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -12,6 +11,8 @@ const BookList = () => {
   const [updatedBookPages, setUpdatedBookPages] = useState("");
   const [updatedBookDescription, setUpdatedBookDescription] = useState("");
   const [updatedBookImage, setUpdatedBookImage] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     db.collection("books")
@@ -40,6 +41,8 @@ const BookList = () => {
     }
   };
 
+  
+
   const handleDeleteBook = (bookId) => {
     db.collection("books")
       .doc(bookId)
@@ -52,6 +55,13 @@ const BookList = () => {
       .catch((error) => {
         console.error("Error al eliminar el libro", error);
       });
+  };
+
+  const handleAddToCart = (bookId) => {
+    const bookToAdd = books.find((book) => book.id === bookId);
+    if (bookToAdd) {
+      setCartItems((prevItems) => [...prevItems, bookToAdd]);
+    }
   };
 
   const handleUpdateBook = (bookId) => {
@@ -92,7 +102,30 @@ const BookList = () => {
 
   return (
     <div className="book-list">
+      <button onClick={() => setShowCart(!showCart)}>
+        Favorites ({cartItems.length})
+      </button>
+
       <h2>Books:</h2>
+      {showCart && (
+        <div className="cart-books">
+          <h3>Your Favorites Books </h3>
+          {cartItems.length === 0 ? (
+            <p>No Favorites Books</p>
+          ) : (
+            <ul>
+              {cartItems.map((book) => (
+                <li key={book.id}>
+                  <h4>{book.title}</h4>
+                  <p>{book.author}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+          <button onClick={() => setCartItems([])}>Empty Cart</button>
+        </div>
+      )}
+
       <div className="book-grid">
         {books.map((book) => (
           <div key={book.id} className="book-card">
@@ -138,6 +171,7 @@ const BookList = () => {
                     Delete
                   </button>
                   <button onClick={() => handleEditBook(book.id)}>Edit</button>
+                  <button onClick={() => handleAddToCart(book.id)}>Add to Cart</button>
                 </div>
               </div>
             )}

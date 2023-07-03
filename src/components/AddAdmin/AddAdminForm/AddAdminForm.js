@@ -1,33 +1,40 @@
-import React, {useState, useRef, useContext} from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import useWindowSize from "../../custom/useWindowSize/useWindowSize";
-import useTranslation from "../../custom/useTranslation/useTranslation";
+//import { AuthenticationContext } from "../services/authentication/authentication.context";
 import { useAuth } from "../../services/authentication/authentication.context";
+//import ToggleTheme from "../../ui/ToggleTheme";
 import { ThemeContext } from "../../services/theme/theme.context";
+import useWindowSize from "../../custom/useWindowSize/useWindowSize";
+import ComboLanguage from "../../ui/ComboLanguage/ComboLanguage";
+import useTranslation from "../../custom/useTranslation/useTranslation";
+
+
 
 const AddAdminForm = () => {
-
+    /*utiliza el hook useState de React para declarar una variable de estado llamada formData
+    formData es un objeto que almacenará los valores de los campos del formulario.
+    setFormData es una función que se utilizará para actualizar el estado de formData*/
     const [formData, setFormData] = useState({
         //inicializo los campos como cadena de texto vacia
         email: "",
         password: "",
         rol: "admin",
     });
-        //constantes que setean 
-        const { signup } = useAuth();
-        const { theme } = useContext(ThemeContext);
-        const navigation = useNavigate();
-        const { width, height } = useWindowSize();
-        const translate = useTranslation();
-        const [error, setError] = useState("");
-    
-    
+
+    //constantes que setean 
+    const { signup } = useAuth();
+    const { theme } = useContext(ThemeContext);
+    const navigation = useNavigate();
+    const { width, height } = useWindowSize();
+    const translate = useTranslation();
+    const [error, setError] = useState("");
+
     //Ref
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
-    
+
     // Alerta por no completar un campo
     const alertSignup = (valueAlert) => {
         valueAlert.current.focus();
@@ -105,10 +112,7 @@ const AddAdminForm = () => {
     const goToLogin = () => {
         navigation("/login");
     }
-    return(
-        <h1>ADD ADMIN FORM</h1>
-    )
-/*
+
     return (
         <div className="signup-container">
             <div className={`signup-box ${theme === "dark" && "signup-box-dark"}`}>
@@ -148,8 +152,7 @@ const AddAdminForm = () => {
                 {error && <p>{error}</p>}
             </div>
         </div>
-    );*/
+    );
 }
-
 
 export default AddAdminForm;
