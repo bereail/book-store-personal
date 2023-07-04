@@ -1,32 +1,25 @@
 import React, { useState } from "react";
-import NewBook from "../NewBook/NewBook";
-//import { useNavigate } from "react-router";
-
-//import { APIContext } from "../services/api/api.context";
 import FireBase from "../../firebase/FireBase";
 import AddAdminButton from "../AddAdmin/AddAdminButton/AddAdminButton";
 import BookList from "../BookList/BookList";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-
+import NewBookButton from "../NewBookButton/NewBookButton";
 
 const Dashboard = () => {
   const [books, setBooks] = useState([]);
 
-
-
   const addBookHandler = (book) => {
     const newBooksArray = [book, ...books];
     setBooks(newBooksArray);
-    localStorage.setItem("books", JSON.stringify(newBooksArray));
+    // Aquí puedes realizar cualquier otra acción relacionada con el nuevo libro agregado
   };
-  
 
   return (
-     <>
-     <Navbar />  
+    <>
+      <Navbar />  
       <AddAdminButton/>
-      <NewBook onBookAdded={addBookHandler} />
+      <NewBookButton onBookAdded={addBookHandler} />
       <BookList />
       <FireBase />
       <Footer />
